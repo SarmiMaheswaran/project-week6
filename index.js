@@ -7,7 +7,7 @@ const app = express();
 app.use(bodyParser.json());
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/foodNutritionDB', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/foodnut', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {

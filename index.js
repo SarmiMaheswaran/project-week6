@@ -37,9 +37,12 @@ app.post('/food-items', async (req, res) => {
 // Retrieve all food items
 app.get('/food-items', async (req, res) => {
     try {
-        const items = await FoodItem.find();
+        console.log('Received request for /food-items');
+        const items = await FoodItem.find().limit(100);
+        console.log('Fetched items from database');
         res.status(200).json(items);
     } catch (err) {
+        console.error('Error fetching items:', err);
         res.status(400).json({ error: err.message });
     }
 });

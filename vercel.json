@@ -14,7 +14,7 @@
 
     ],
     "env": {
-    "MONGODB_URI": "mongodb://localhost:27017/",
+    "MONGODB_URI": "mongodb+srv://sarmimaheswaran:<password>@cluster1.kvqy4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1",
     "OTHER_ENV_VARIABLE": "value"
   }
   }

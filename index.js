@@ -7,7 +7,7 @@ const app = express();
 app.use(bodyParser.json());
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/')
+mongoose.connect(process.env.MONGODB_URI || '')
 
 // Create new food items (accepts an array of items)
 app.post('/food-items', async (req, res) => {

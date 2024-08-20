@@ -7,14 +7,7 @@ const app = express();
 app.use(bodyParser.json());
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/foodnut', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => {
-    console.log('Connected to MongoDB');
-}).catch((err) => {
-    console.error('Could not connect to MongoDB:', err.message);
-});
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/foodnut')
 
 // Create new food items (accepts an array of items)
 app.post('/food-items', async (req, res) => {

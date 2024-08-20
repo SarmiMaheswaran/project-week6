@@ -9,10 +9,14 @@
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "index.js"
+        "dest": "/index.js"
       }
 
-    ]
+    ],
+    "env": {
+    "MONGODB_URI": "mongodb://localhost:27017/",
+    "OTHER_ENV_VARIABLE": "value"
+  }
   }
   
   

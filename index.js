@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-
 const FoodItem = require('./models/FoodItem');
 
 const app = express();
@@ -38,11 +37,6 @@ app.get('/food-items', async (req, res) => {
     }
 });
 
-app.get('/', (req, res) => {
-    res.send('Welcome to the Food and Nutrition API!');
-});
-
-
 // Retrieve a specific food item by ID
 app.get('/food-items/:id', async (req, res) => {
     try {
@@ -57,7 +51,7 @@ app.get('/food-items/:id', async (req, res) => {
 // Update a food item
 app.put('/food-items/:id', async (req, res) => {
     try {
-        const updatedItem = await FoodItems.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const updatedItem = await FoodItem.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!updatedItem) return res.status(404).json({ message: 'Food item not found' });
         res.status(200).json(updatedItem);
     } catch (err) {
@@ -68,7 +62,7 @@ app.put('/food-items/:id', async (req, res) => {
 // Delete a food item
 app.delete('/food-items/:id', async (req, res) => {
     try {
-        const deletedItem = await FoodItems.findByIdAndDelete(req.params.id);
+        const deletedItem = await FoodItem.findByIdAndDelete(req.params.id);
         if (!deletedItem) return res.status(404).json({ message: 'Food item not found' });
         res.status(200).json({ message: 'Food item deleted successfully' });
     } catch (err) {
@@ -77,7 +71,7 @@ app.delete('/food-items/:id', async (req, res) => {
 });
 
 // Start the server
-const PORT = process.env.PORT || 6000;
+const PORT = process.env.PORT || 7000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

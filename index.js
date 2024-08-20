@@ -20,7 +20,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/foodNutri
 // Create a new food item
 app.post('/food-items', async (req, res) => {
     try {
-        const newItem = new FoodItems(req.body);
+        const newItem = new FoodItem(req.body);
         const savedItem = await newItem.save();
         res.status(201).json(savedItem);
     } catch (err) {
@@ -31,7 +31,7 @@ app.post('/food-items', async (req, res) => {
 // Retrieve all food items
 app.get('/food-items', async (req, res) => {
     try {
-        const items = await FoodItems.find();
+        const items = await FoodItem.find();
         res.status(200).json(items);
     } catch (err) {
         res.status(400).json({ error: err.message });
@@ -46,7 +46,7 @@ app.get('/', (req, res) => {
 // Retrieve a specific food item by ID
 app.get('/food-items/:id', async (req, res) => {
     try {
-        const item = await FoodItems.findById(req.params.id);
+        const item = await FoodItem.findById(req.params.id);
         if (!item) return res.status(404).json({ message: 'Food item not found' });
         res.status(200).json(item);
     } catch (err) {
@@ -68,7 +68,7 @@ app.put('/food-items/:id', async (req, res) => {
 // Delete a food item
 app.delete('/food-items/:id', async (req, res) => {
     try {
-        const deletedItem = await FoodItem.findByIdAndDelete(req.params.id);
+        const deletedItem = await FoodItems.findByIdAndDelete(req.params.id);
         if (!deletedItem) return res.status(404).json({ message: 'Food item not found' });
         res.status(200).json({ message: 'Food item deleted successfully' });
     } catch (err) {

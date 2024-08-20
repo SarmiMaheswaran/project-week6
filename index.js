@@ -16,16 +16,23 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/foodNutri
     console.error('Could not connect to MongoDB:', err.message);
 });
 
-// Create a new food item
+// Create new food items (accepts an array of items)
 app.post('/food-items', async (req, res) => {
     try {
-        const newItem = new FoodItem(req.body);
-        const savedItem = await newItem.save();
-        res.status(201).json(savedItem);
+        const items = req.body;
+        if (Array.isArray(items)) {
+            const savedItems = await FoodItem.insertMany(items);
+            res.status(201).json(savedItems);
+        } else {
+            const newItem = new FoodItem(items);
+            const savedItem = await newItem.save();
+            res.status(201).json(savedItem);
+        }
     } catch (err) {
         res.status(400).json({ error: err.message });
     }
 });
+
 
 // Retrieve all food items
 app.get('/food-items', async (req, res) => {
@@ -71,7 +78,7 @@ app.delete('/food-items/:id', async (req, res) => {
 });
 
 // Start the server
-const PORT = process.env.PORT || 7000;
+const PORT = process.env.PORT || 9000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
